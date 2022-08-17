@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: as-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: as-app
+  template:
+    metadata:
+      labels:
+        app: as-app
+    spec:
+      containers:
+        - name: as-app
+          image: aniket2525/new-repo:latest
+          ports:
+            - containerPort: 80
