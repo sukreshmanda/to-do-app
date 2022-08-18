@@ -30,7 +30,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . -t  aniket2525/new-repo:$(cat tag.txt)
     - name: share tag file among jobs
-    - uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3
       with:
         name: tag
         path: tag.txt
