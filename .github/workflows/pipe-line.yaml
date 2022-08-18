@@ -25,7 +25,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag aniket2525/new-repo:latest
+      run: docker build docker build . -t  aniket2525/new-repo:latest
+    - name: echo chnage
+      run: cat src/components/Navbar/Navbar/index.js
     - name: login to docker hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
