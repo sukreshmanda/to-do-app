@@ -32,3 +32,22 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: upload image to dokcer hub
       run: docker push aniket2525/new-repo:latest 
+
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: configure eks
+        run: |
+          aws eks update-kubeconfig --region eu-central-1  --name as-app-cluster
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'eu-central-1'
+      - name: deploy to prod
+        run: |
+          kubectl apply -f todoo.yaml
+          kubectl apply -f service.yaml
+      - name: get url of prod
+        run: kubectl get svc
+        
