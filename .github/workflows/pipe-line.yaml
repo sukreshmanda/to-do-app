@@ -20,6 +20,7 @@ jobs:
         run: yarn test
 
   conatinerize:
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -34,6 +35,7 @@ jobs:
       run: docker push aniket2525/new-repo:latest 
 
   deployment:
+    needs: conatinerize
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -50,4 +52,3 @@ jobs:
           kubectl apply -f service.yaml
       - name: get url of prod
         run: kubectl get svc
-        
