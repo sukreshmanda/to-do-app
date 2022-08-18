@@ -43,7 +43,7 @@ jobs:
       run: docker push aniket2525/new-repo:$(cat tag.txt)
 
   deployment:
-    needs: containerize
+    needs: conatinerize
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
