@@ -61,6 +61,8 @@ jobs:
         run: |
           export TAG=$(cat tag.txt)
           sed -i "s/latest/$TAG/g" todoo.yaml
+      - name: show todoo.yaml
+        run: cat todoo.yaml
       - name: configure eks
         run: aws eks update-kubeconfig --region eu-central-1  --name as-app-cluster
       - name: deploy to prod
