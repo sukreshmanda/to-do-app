@@ -19,7 +19,7 @@ resource "aws_eks_node_group" "as-app-node" {
   node_role_arn = aws_iam_role.as-app-node-role.arn
   subnet_ids = [aws_subnet.public-1.id, aws_subnet.public-2.id]
 #   ami_type = "ami-0c956e207f9d113d5"
-  instance_types = ["t2.micro"]
+  # instance_types = ["t2.micro"]
 
   scaling_config {
     desired_size = 2

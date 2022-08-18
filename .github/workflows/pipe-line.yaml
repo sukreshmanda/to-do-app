@@ -8,8 +8,17 @@ on:
 
 jobs:
 
-  docker:
-
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+      - name: test source code
+        run: yarn test
+        
+  conatinerize:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -22,4 +31,3 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: upload image to dokcer hub
       run: docker push aniket2525/new-repo:latest 
-  
