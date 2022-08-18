@@ -25,3 +25,11 @@ resource "aws_subnet" "public-2" {
     Name = "as-app-public-subnet-2"
   }
 }
+
+resource "aws_internet_gateway" "as-app-gateway" {
+  vpc_id = aws_vpc.as-app-vpc.id
+
+  tags = {
+    Name = "main"
+  }
+}
