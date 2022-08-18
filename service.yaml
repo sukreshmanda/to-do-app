@@ -5,11 +5,11 @@ metadata:
   labels:
     app: react-docker
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 80
       protocol: TCP
-      nodePort: 31003
+      # nodePort: 31003
   selector:
     app: as-app
