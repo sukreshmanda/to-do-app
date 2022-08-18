@@ -19,7 +19,7 @@ jobs:
       - name: test source code
         run: yarn test
 
-  conatinerize:
+  containerize:
     needs: test
     runs-on: ubuntu-latest
 
@@ -43,7 +43,7 @@ jobs:
       run: docker push aniket2525/new-repo:$(cat tag.txt)
 
   deployment:
-    needs: conatinerize
+    needs: containerize
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
