@@ -22,12 +22,18 @@ jobs:
   conatinerize:
     needs: test
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . -t  aniket2525/new-repo:latest
-    - name: echo chnage
-      run: cat src/components/Navbar/Navbar/index.js
+    - name: generate tag into file
+      run: date +%s > tag.txt
+    - name: share tag file among jobs
+    - uses: actions/upload-artifact@v3
+      with:
+        name: tag
+        path: tag.txt
     - name: login to docker hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
@@ -47,6 +53,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: tag
+      - name: update tag
+        run: |
+          export TAG=$(cat tag.txt)
+          sed -i "s/latest/$TAG/g" todoo.yaml
       - name: configure eks
         run: aws eks update-kubeconfig --region eu-central-1  --name as-app-cluster
       - name: deploy to prod
