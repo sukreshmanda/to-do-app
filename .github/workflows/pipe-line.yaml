@@ -39,11 +39,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: upload image to dokcer hub
+    - name: upload image to docker hub
       run: docker push aniket2525/new-repo:$(cat tag.txt)
 
   deployment:
-    needs: conatinerize
+    needs: containerize
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
