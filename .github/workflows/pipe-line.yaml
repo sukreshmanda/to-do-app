@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build docker build . -t  aniket2525/new-repo:latest
+      run: docker build . -t  aniket2525/new-repo:latest
     - name: echo chnage
       run: cat src/components/Navbar/Navbar/index.js
     - name: login to docker hub
